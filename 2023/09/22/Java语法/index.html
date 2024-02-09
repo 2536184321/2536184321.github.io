@@ -1,0 +1,948 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="cky">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Java语法为什么专门要有一篇针对Java语法的文章呢，其实不是为了去梳理所有语法知识，而是针对算法题目这一块，有需要专门掌握的内容。比如常用的各种集合方法，注意事项。这些都是我在刷算法题目中积累的内容。 类型转换字符串转其他1. 字符串与数组之间的转换：  字符串转换为字符数组： 12String str &#x3D; &quot;Hello&quot;;char[] charArray &#x3D; str.to">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java语法糖">
+<meta property="og:url" content="https://2536184321.github.io/2023/09/22/Java%E8%AF%AD%E6%B3%95/index.html">
+<meta property="og:site_name" content="cky-blog">
+<meta property="og:description" content="Java语法为什么专门要有一篇针对Java语法的文章呢，其实不是为了去梳理所有语法知识，而是针对算法题目这一块，有需要专门掌握的内容。比如常用的各种集合方法，注意事项。这些都是我在刷算法题目中积累的内容。 类型转换字符串转其他1. 字符串与数组之间的转换：  字符串转换为字符数组： 12String str &#x3D; &quot;Hello&quot;;char[] charArray &#x3D; str.to">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-22T06:28:00.000Z">
+<meta property="article:modified_time" content="2024-02-09T10:01:11.769Z">
+<meta property="article:author" content="cky">
+<meta property="article:tag" content="知识分享">
+<meta property="article:tag" content="Java">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Java语法糖 - cky-blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"2536184321.github.io","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Java语法糖"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-22 14:28" pubdate>
+          2023年9月22日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.2k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          77 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Java语法糖</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="Java语法"><a href="#Java语法" class="headerlink" title="Java语法"></a>Java语法</h1><p>为什么专门要有一篇针对Java语法的文章呢，其实不是为了去梳理所有语法知识，而是针对算法题目这一块，有需要专门掌握的内容。比如常用的各种集合方法，注意事项。这些都是我在刷算法题目中积累的内容。</p>
+<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><h3 id="字符串转其他"><a href="#字符串转其他" class="headerlink" title="字符串转其他"></a>字符串转其他</h3><p><strong>1. 字符串与数组之间的转换：</strong></p>
+<ul>
+<li><p>字符串转换为字符数组：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Hello&quot;</span>;<br><span class="hljs-type">char</span>[] charArray = str.toCharArray(); <span class="hljs-comment">// 返回字符数组 [&#x27;H&#x27;, &#x27;e&#x27;, &#x27;l&#x27;, &#x27;l&#x27;, &#x27;o&#x27;]</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>字符数组转换为字符串：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-type">char</span>[] charArray = &#123;<span class="hljs-string">&#x27;H&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;l&#x27;</span>, <span class="hljs-string">&#x27;l&#x27;</span>, <span class="hljs-string">&#x27;o&#x27;</span>&#125;;<br><span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(charArray); <span class="hljs-comment">// 返回字符串 &quot;Hello&quot;</span><br><span class="hljs-comment">// 或者</span><br><span class="hljs-type">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> String.valueOf(charArray); <span class="hljs-comment">// 返回字符串 &quot;Hello&quot;</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>2. 字符串与列表之间的转换：</strong></p>
+<ul>
+<li><p>字符串转换为列表：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-built_in">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Hello,World&quot;</span><span class="hljs-operator">;</span><br><span class="hljs-built_in">List</span><span class="hljs-operator">&lt;</span><span class="hljs-built_in">String</span><span class="hljs-operator">&gt;</span> <span class="hljs-variable">list</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">Arrays</span><span class="hljs-operator">.</span><span class="hljs-variable">asList</span><span class="hljs-punctuation">(</span><span class="hljs-variable">str</span><span class="hljs-operator">.</span><span class="hljs-variable">split</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;,&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-operator">;</span> <span class="hljs-operator">//</span> 返回列表 <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;Hello&quot;</span><span class="hljs-operator">,</span> <span class="hljs-string">&quot;World&quot;</span><span class="hljs-punctuation">]</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>列表转换为字符串：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-built_in">List</span><span class="hljs-operator">&lt;</span><span class="hljs-built_in">String</span><span class="hljs-operator">&gt;</span> <span class="hljs-variable">list</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">Arrays</span><span class="hljs-operator">.</span><span class="hljs-variable">asList</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;Hello&quot;</span><span class="hljs-operator">,</span> <span class="hljs-string">&quot;World&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-operator">;</span><br><span class="hljs-built_in">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">String</span><span class="hljs-operator">.</span><span class="hljs-variable">join</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;,&quot;</span><span class="hljs-operator">,</span> <span class="hljs-variable">list</span><span class="hljs-punctuation">)</span><span class="hljs-operator">;</span> <span class="hljs-operator">//</span> 返回字符串 <span class="hljs-string">&quot;Hello,World&quot;</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>3. 字符串与集合之间的转换：</strong></p>
+<ul>
+<li><p>字符串转换为集合：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-built_in">String</span> <span class="hljs-variable">str</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;Hello,World&quot;</span><span class="hljs-operator">;</span><br><span class="hljs-built_in">List</span><span class="hljs-operator">&lt;</span><span class="hljs-built_in">String</span><span class="hljs-operator">&gt;</span> <span class="hljs-variable">list</span> <span class="hljs-operator">=</span> <span class="hljs-built_in">Arrays</span><span class="hljs-operator">.</span><span class="hljs-variable">asList</span><span class="hljs-punctuation">(</span><span class="hljs-variable">str</span><span class="hljs-operator">.</span><span class="hljs-variable">split</span><span class="hljs-punctuation">(</span><span class="hljs-string">&quot;,&quot;</span><span class="hljs-punctuation">)</span><span class="hljs-punctuation">)</span><span class="hljs-operator">;</span> <span class="hljs-operator">//</span> 返回列表 <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;Hello&quot;</span><span class="hljs-operator">,</span> <span class="hljs-string">&quot;World&quot;</span><span class="hljs-punctuation">]</span><br><span class="hljs-built_in">Set</span><span class="hljs-operator">&lt;</span><span class="hljs-built_in">String</span><span class="hljs-operator">&gt;</span> <span class="hljs-variable">set</span> <span class="hljs-operator">=</span> <span class="hljs-variable">new</span> <span class="hljs-variable">HashSet</span><span class="hljs-operator">&lt;&gt;</span><span class="hljs-punctuation">(</span><span class="hljs-variable">list</span><span class="hljs-punctuation">)</span><span class="hljs-operator">;</span> <span class="hljs-operator">//</span> 返回集合 <span class="hljs-punctuation">&#123;</span><span class="hljs-string">&quot;Hello&quot;</span><span class="hljs-operator">,</span> <span class="hljs-string">&quot;World&quot;</span><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>集合转换为字符串：</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lasso"><span class="hljs-built_in">Set</span>&lt;<span class="hljs-built_in">String</span>&gt; <span class="hljs-built_in">set</span> = <span class="hljs-literal">new</span> HashSet&lt;&gt;(Arrays.asList(<span class="hljs-string">&quot;Hello&quot;</span>, <span class="hljs-string">&quot;World&quot;</span>));<br><span class="hljs-built_in">String</span> str = <span class="hljs-built_in">String</span>.<span class="hljs-keyword">join</span>(<span class="hljs-string">&quot;,&quot;</span>, <span class="hljs-built_in">set</span>); <span class="hljs-comment">// 返回字符串 &quot;Hello,World&quot;</span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<p><strong>4. 字符串与基本类型之间的转换：</strong></p>
+<ul>
+<li>字符串转其他：<code>Integer.parseInt() Double.parseDouble() Boolean.parseBoolean()</code></li>
+<li>其他转字符串：<code>String.valueOf() Integer.toString() Double.toString() Boolean.toString()</code></li>
+</ul>
+<h2 id="Arrays"><a href="#Arrays" class="headerlink" title="Arrays"></a>Arrays</h2><p>Java语言中的<code>Arrays</code>类是一个工具类，位于<code>java.util</code>包下。这个类包含用来操作数组（例如排序和搜索）的各种静态方法。</p>
+<p>下面是<code>Arrays</code>类的一些重要方法：</p>
+<ul>
+<li>**sort()**：对数组进行排序。</li>
+<li>**binarySearch()**：使用二分查找算法查找数组中的元素。</li>
+<li>**equals()**：比较两个数组是否相等。</li>
+<li>**fill()**：使用指定的值填充数组。</li>
+<li>**asList()**：将数组转化为<code>List</code>。</li>
+</ul>
+<p>关于<code>Arrays</code>类和<code>Collection</code>、<code>List</code>的关系：</p>
+<ul>
+<li><code>Arrays</code>类专门用来操作数组，而<code>Collection</code>和<code>List</code>是Java集合框架中的接口，主要用来操作集合。</li>
+<li><code>Arrays.asList()</code>方法可以将一个数组转化为<code>List</code>，但需要注意的是，这个方法返回的<code>List</code>大小是固定的，不能增加或删除元素，因为它实际上只是对原数组的一种视图。</li>
+<li>另外，<code>List</code>、<code>Set</code>、<code>Queue</code>都是继承或实现了<code>Collection</code>接口，因此有一些通用的操作，比如add、remove等，可以通过<code>Collections</code>类（请注意和<code>Collection</code>接口区分）提供的一些静态方法来操作。比如<code>Collections.sort()</code>可以对<code>List</code>进行排序。</li>
+</ul>
+<h2 id="集合方法合集"><a href="#集合方法合集" class="headerlink" title="集合方法合集"></a>集合方法合集</h2><h3 id="List"><a href="#List" class="headerlink" title="List"></a>List</h3><ul>
+<li><code>add(E element)</code>: 将指定的元素添加到列表的末尾。</li>
+<li><code>get(int index)</code>: 返回列表中指定索引位置的元素。</li>
+<li><code>set(int index, E element)</code>: 替换列表中指定索引位置的元素。</li>
+<li><code>remove(int index)</code>: 删除列表中指定索引位置的元素。</li>
+<li><code>size()</code>: 返回列表中的元素数量。</li>
+<li><code>isEmpty()</code>: 判断列表是否为空。</li>
+<li><code>contains(Object obj)</code>: 判断列表是否包含指定的元素。</li>
+<li><code>indexOf(Object obj)</code>: 返回指定元素在列表中首次出现的索引。</li>
+<li><code>subList(int fromIndex, int toIndex)</code>: 返回列表中指定范围的子列表。</li>
+</ul>
+<h4 id="ArrayList"><a href="#ArrayList" class="headerlink" title="ArrayList"></a>ArrayList</h4><p><strong>ArrayList独特方法：</strong></p>
+<ul>
+<li><code>trimToSize()</code>: 将ArrayList的容量调整为当前元素的数量，以减少内存占用。</li>
+<li><code>ensureCapacity(int minCapacity)</code>: 增加ArrayList的容量，以确保其至少能容纳指定的最小元素数量。</li>
+<li><code>toArray()</code>: 返回包含ArrayList中所有元素的数组。</li>
+<li><code>toArray(T[] array)</code>: 将ArrayList中的元素复制到指定的数组中，并返回该数组。</li>
+<li><code>removeRange(int fromIndex, int toIndex)</code>: 移除列表中指定范围的元素。</li>
+</ul>
+<h4 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h4><p><strong>LinkedList独特方法：</strong></p>
+<ul>
+<li><code>addFirst(E element)</code>: 在列表的开头插入指定的元素。</li>
+<li><code>addLast(E element)</code>: 在列表的末尾插入指定的元素。</li>
+<li><code>getFirst()</code>: 返回列表的第一个元素，但不移除它。</li>
+<li><code>getLast()</code>: 返回列表的最后一个元素，但不移除它。</li>
+<li><code>removeFirst()</code>: 移除并返回列表的第一个元素。</li>
+<li><code>removeLast()</code>: 移除并返回列表的最后一个元素。</li>
+<li><code>offer(E element)</code>: 在列表的末尾插入指定的元素。</li>
+<li><code>offerFirst(E element)</code>: 在列表的开头插入指定的元素。</li>
+<li><code>offerLast(E element)</code>: 在列表的末尾插入指定的元素。</li>
+<li><code>poll()</code>: 移除并返回列表的第一个元素。</li>
+<li><code>pollFirst()</code>: 移除并返回列表的第一个元素。</li>
+<li><code>pollLast()</code>: 移除并返回列表的最后一个元素。</li>
+<li><code>peek()</code>: 返回列表的第一个元素，但不移除它。</li>
+<li><code>peekFirst()</code>: 返回列表的第一个元素，但不移除它。</li>
+<li><code>peekLast()</code>: 返回列表的最后一个元素，但不移除它。</li>
+</ul>
+<p>除了实现Deque接口外，LinkedList还实现了List接口和Queue接口，因此您可以将LinkedList用作列表或队列的实例。</p>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><ul>
+<li><code>add(E element)</code>: 将指定的元素添加到集合中。</li>
+<li><code>remove(Object obj)</code>: 从集合中删除指定的元素。</li>
+<li><code>contains(Object obj)</code>: 判断集合是否包含指定的元素。</li>
+<li><code>size()</code>: 返回集合中的元素数量。</li>
+<li><code>isEmpty()</code>: 判断集合是否为空。</li>
+<li><code>clear()</code>: 清空集合中的所有元素。</li>
+<li><code>iterator()</code>: 返回一个迭代器，用于遍历集合中的元素。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java">Iterator&lt;T&gt; iterator = set.iterator();<br><span class="hljs-keyword">while</span> (iterator.hasNext()) &#123;<br>    <span class="hljs-type">T</span> <span class="hljs-variable">element</span> <span class="hljs-operator">=</span> iterator.next();<br>    <span class="hljs-comment">// 对元素进行操作</span><br>&#125;<br><span class="hljs-comment">// 第二种</span><br><span class="hljs-keyword">for</span> (T element : set) &#123;<br>    <span class="hljs-comment">// 对元素进行操作</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><ul>
+<li><code>put(K key, V value)</code>: 将指定的键值对添加到映射中。</li>
+<li><code>get(Object key)</code>: 返回与指定键关联的值。</li>
+<li><code>remove(Object key)</code>: 从映射中删除指定键及其对应的值。</li>
+<li><code>containsKey(Object key)</code>: 判断映射是否包含指定的键。</li>
+<li><code>containsValue(Object value)</code>: 判断映射是否包含指定的值。</li>
+<li><code>size()</code>: 返回映射中键值对的数量。</li>
+<li><code>isEmpty()</code>: 判断映射是否为空。</li>
+<li><code>keySet()</code>: 返回映射中所有键的集合。</li>
+<li><code>values()</code>: 返回映射中所有值的集合。</li>
+<li><code>entrySet()</code>: 返回映射中所有键值对的集合。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java">Map&lt;K, V&gt; map = ...; <span class="hljs-comment">// 假设这里是你的Map对象</span><br><br><span class="hljs-keyword">for</span> (Map.Entry&lt;K, V&gt; entry : map.entrySet()) &#123;<br>    <span class="hljs-type">K</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> entry.getKey();<br>    <span class="hljs-type">V</span> <span class="hljs-variable">value</span> <span class="hljs-operator">=</span> entry.getValue();<br>    <span class="hljs-comment">// 对键值对进行操作</span><br>&#125;<br><span class="hljs-comment">// 迭代器遍历</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="队列和栈"><a href="#队列和栈" class="headerlink" title="队列和栈"></a>队列和栈</h3><p>Java提供了<code>Queue</code>接口来定义队列的行为，但它并没有提供具体的实现类。<code>Queue</code>接口继承自<code>Collection</code>接口，因此可以使用任何<code>Collection</code>的实现类来实现队列的功能，包括<code>List</code>。</p>
+<p>栈不是直接使用<code>List</code>、<code>Map</code>或<code>Set</code>这三种集合类型来实现的。尽管这些集合类型可以用于存储数据，但它们并没有提供专门用于栈操作的接口或方法。在 Java 中，<code>java.util.Stack</code> 类提供了栈的基本实现。下面是 <code>Stack</code> 类的常用方法列表：</p>
+<ol>
+<li><code>void push(E item)</code>: 将元素压入栈顶。</li>
+<li><code>E pop()</code>: 弹出并返回栈顶元素。</li>
+<li><code>E peek()</code>: 返回栈顶元素，但不移除它。</li>
+<li><code>boolean empty()</code>: 判断栈是否为空。（<strong>注意，不是isEmpty</strong>）</li>
+<li><code>int search(Object o)</code>: 查找指定元素在栈中的位置，如果存在则返回相对于栈顶的位置（栈顶为 1），否则返回 -1。</li>
+</ol>
+<p>在 Java 中，栈通常是通过数组或链表来实现的。Java 标准库中提供了两种主要的栈实现：</p>
+<ol>
+<li><p><strong>基于数组的实现：</strong> <code>java.util.Stack</code> 类是一个基于动态数组的栈实现。它是 <code>Vector</code> 类的一个子类，因此支持所有 <code>Vector</code> 的操作，但通常推荐使用 <code>ArrayDeque</code> 代替，因为 <code>ArrayDeque</code> 是 <code>Deque</code> 接口的实现，性能更好。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">Stack&lt;Integer&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Stack</span>&lt;&gt;();<br>stack.push(<span class="hljs-number">1</span>);<br>stack.push(<span class="hljs-number">2</span>);<br>stack.push(<span class="hljs-number">3</span>);<br><span class="hljs-type">int</span> <span class="hljs-variable">poppedElement</span> <span class="hljs-operator">=</span> stack.pop();<br></code></pre></td></tr></table></figure>
+</li>
+<li><p><strong>基于链表的实现：</strong> <code>java.util.LinkedList</code> 类是一个双向链表实现的 <code>List</code> 接口，也可以被用作栈。在栈的操作中，<code>LinkedList</code> 提供了 <code>push</code>（在链表头添加元素）和 <code>pop</code>（从链表头移除元素）等方法。</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">LinkedList&lt;Integer&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">LinkedList</span>&lt;&gt;();<br>stack.push(<span class="hljs-number">1</span>);<br>stack.push(<span class="hljs-number">2</span>);<br>stack.push(<span class="hljs-number">3</span>);<br><span class="hljs-type">int</span> <span class="hljs-variable">poppedElement</span> <span class="hljs-operator">=</span> stack.pop();<br></code></pre></td></tr></table></figure></li>
+</ol>
+<p><strong>注意：</strong></p>
+<ul>
+<li>在实际使用中，更常见的是使用 <code>Deque</code> 接口来实现栈。<code>Deque</code> 是一个双端队列（Double-Ended Queue）接口，可以在两端进行插入和删除操作，因此也适用于栈的实现。<code>ArrayDeque</code> 类是一个 <code>Deque</code> 接口的实现，具有良好的性能，通常用于代替 <code>Stack</code> 类。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">Deque&lt;Integer&gt; stack = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayDeque</span>&lt;&gt;();<br>stack.push(<span class="hljs-number">1</span>);<br>stack.push(<span class="hljs-number">2</span>);<br>stack.push(<span class="hljs-number">3</span>);<br><span class="hljs-type">int</span> <span class="hljs-variable">poppedElement</span> <span class="hljs-operator">=</span> stack.pop();<br></code></pre></td></tr></table></figure>
+
+<p>无论选择基于数组还是链表的实现，实际的选择通常取决于使用场景和性能需求。如果需要高效的栈操作，可能会选择 <code>ArrayDeque</code>，但如果在操作中需要频繁地插入和删除元素，可能会选择 <code>LinkedList</code>。</p>
+<h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><ul>
+<li><code>length()</code>：返回字符串的长度。</li>
+<li><code>charAt(int index)</code>：返回指定位置的字符。</li>
+<li><code>isEmpty()</code>：检查字符串是否为空。</li>
+<li><code>toUpperCase()</code>：将字符串转换为大写形式。</li>
+<li><code>toLowerCase()</code>：将字符串转换为小写形式。</li>
+<li><code>equals(Object obj)</code>：比较两个字符串是否相等。</li>
+<li><code>equalsIgnoreCase(String anotherString)</code>：忽略大小写比较两个字符串是否相等。</li>
+<li><code>concat(String str)</code>：将指定字符串连接到原字符串的末尾。</li>
+<li><code>substring(int beginIndex)</code>：返回从指定位置开始到字符串末尾的子串。</li>
+<li><code>substring(int beginIndex, int endIndex不包含)</code>：返回指定范围内的子串，。</li>
+<li><code>split(String regex)</code>：根据给定的正则表达式将字符串拆分成字符串数组。</li>
+<li><code>trim()</code>：去除字符串开头和结尾的空白字符。</li>
+<li><code>replace(char oldChar, char newChar)</code>：用新字符替换字符串中的旧字符。</li>
+<li><code>replaceAll(String regex, String replacement)</code>：使用新字符串替换满足正则表达式的部分字符串。</li>
+<li><code>contains(CharSequence sequence)</code>：检查字符串是否包含指定的子串。</li>
+<li><code>startsWith(String prefix)</code>：检查字符串是否以指定的前缀开头。</li>
+<li><code>endsWith(String suffix)</code>：检查字符串是否以指定的后缀结尾。</li>
+<li><code>indexOf(String str)</code>：返回指定子串在字符串中第一次出现的位置。</li>
+<li><code>lastIndexOf(String str)</code>：返回指定子串在字符串中最后一次出现的位置。</li>
+<li><code>String.format(format, args)</code>: <code>String.format(&quot;Name: %s, Age: %d, Height: %.2f meters&quot;, name, age, height);</code><ul>
+<li><code>%s</code>: 字符串</li>
+<li><code>%d</code>: 十进制整数</li>
+<li><code>%f</code>: 浮点数</li>
+<li><code>%b</code>: 布尔值</li>
+<li><code>%c</code>: 字符</li>
+<li><code>%x</code>: 十六进制整数</li>
+<li><code>%n</code>: 换行符</li>
+</ul>
+</li>
+</ul>
+<h3 id="StringBuilder"><a href="#StringBuilder" class="headerlink" title="StringBuilder"></a>StringBuilder</h3><ul>
+<li><strong><code>int length()</code></strong><ul>
+<li>返回当前字符串的长度。</li>
+</ul>
+</li>
+<li><strong><code>int capacity()</code></strong><ul>
+<li>返回<code>StringBuilder</code>的当前容量。</li>
+</ul>
+</li>
+<li><strong><code>StringBuilder append(String str)</code></strong><ul>
+<li>将指定的字符串追加到此字符序列。</li>
+</ul>
+</li>
+<li><strong><code>deleteCharAt(int index)</code></strong><ul>
+<li>删除给定索引位置的字符。</li>
+</ul>
+</li>
+<li><strong><code>StringBuilder delete(int start, int end)</code></strong><ul>
+<li>删除从<code>start</code>到<code>end-1</code>索引位置的字符。</li>
+</ul>
+</li>
+<li><strong><code>String substring(int start)</code></strong><ul>
+<li>返回一个新的<code>String</code>，它包含此序列当前长度的子字符串。</li>
+</ul>
+</li>
+<li><strong><code>String substring(int start, int end)</code></strong><ul>
+<li>返回一个新的<code>String</code>，它包含此序列从<code>start</code>到<code>end-1</code>索引位置的子字符串。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Stream流"><a href="#Stream流" class="headerlink" title="Stream流"></a>Stream流</h2><p>Stream流分为1.创建Stream；2.中间操作；3.终端操作三部分。</p>
+<h3 id="1-创建Stream"><a href="#1-创建Stream" class="headerlink" title="1. 创建Stream"></a>1. 创建Stream</h3><p>有多种方式可以创建Stream：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">List&lt;String&gt; list = Arrays.asList(<span class="hljs-string">&quot;apple&quot;</span>, <span class="hljs-string">&quot;banana&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>);<br>Stream&lt;String&gt; streamFromList = list.stream(); <span class="hljs-comment">// 从集合创建</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">codeString[] array = &#123;<span class="hljs-string">&quot;apple&quot;</span>, <span class="hljs-string">&quot;banana&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>&#125;;<br>Stream&lt;String&gt; streamFromArray = Arrays.stream(array); <span class="hljs-comment">// 从数组创建</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Stream&lt;String&gt; streamOfValues = Stream.of(<span class="hljs-string">&quot;apple&quot;</span>, <span class="hljs-string">&quot;banana&quot;</span>, <span class="hljs-string">&quot;orange&quot;</span>); <span class="hljs-comment">// stream.of创建</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="2-中间操作"><a href="#2-中间操作" class="headerlink" title="2. 中间操作"></a>2. 中间操作</h3><p>中间操作是对数据进行一系列处理的过程，返回的仍然是一个Stream。常见的中间操作有：</p>
+<p><code>filter(Predicate&lt;T&gt; predicate)</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">stream.filter(s -&gt; s.startsWith(<span class="hljs-string">&quot;a&quot;</span>)); <span class="hljs-comment">// 过滤掉不符合条件的元素。</span><br></code></pre></td></tr></table></figure>
+
+<p><code>map(Function&lt;T, R&gt; mapper)</code>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">stream.map(String::toUpperCase); <span class="hljs-comment">// 对每个元素应用函数。</span><br></code></pre></td></tr></table></figure>
+
+<p><code>distinct()</code>：去重，去掉重复的元素。</p>
+<p><code>sorted()</code>：排序元素。</p>
+<h3 id="3-终端操作"><a href="#3-终端操作" class="headerlink" title="3. 终端操作"></a>3. 终端操作</h3><p>终端操作是对Stream进行最终操作，得到最终的结果。一旦终端操作执行，Stream就被消费，不能再被使用。常见的终端操作有：</p>
+<p><code>forEach(Consumer&lt;T&gt; action)</code>：对每个元素执行指定操作。</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">stream.<span class="hljs-keyword">forEach</span>(<span class="hljs-keyword">System</span>.<span class="hljs-keyword">out</span>::println);<br></code></pre></td></tr></table></figure>
+
+<p><code>collect(Collectors.toList())</code>：将Stream元素收集到一个List中。</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">List&lt;String&gt; collectedList = stream.collect(<span class="hljs-module-access"><span class="hljs-module"><span class="hljs-identifier">Collectors</span>.</span></span><span class="hljs-keyword">to</span><span class="hljs-constructor">List()</span>);<br></code></pre></td></tr></table></figure>
+
+<p><code>count()</code>：返回Stream中元素的个数。</p>
+<p><code>anyMatch(Predicate&lt;T&gt; predicate)</code>：判断是否至少匹配一个元素。</p>
+<p><code>allMatch(Predicate&lt;T&gt; predicate)</code>：判断是否全部匹配。</p>
+<p><code>noneMatch(Predicate&lt;T&gt; predicate)</code>：判断是否没有一个元素匹配。</p>
+<p><code>findFirst()</code>和<code>findAny()</code>：返回第一个元素或任意一个元素。</p>
+<h2 id="Lambda表达式"><a href="#Lambda表达式" class="headerlink" title="Lambda表达式"></a>Lambda表达式</h2><p>Lambda表达式可以看作是匿名函数的一种形式，它提供了一种简洁的方式来传递行为（方法）给方法。</p>
+<p>Lambda表达式的基本语法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">(parameters) -&gt; expression<br></code></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">(parameters) -&gt; &#123; statements; &#125;<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>参数列表：参数可以为空或非空，如果有多个参数，用逗号分隔。</li>
+<li>箭头符号 <code>-&gt;</code>：箭头符号将参数列表和Lambda体分隔开。</li>
+<li>Lambda体：可以是表达式或语句块。如果是表达式，结果将自动返回；如果是语句块，需要使用 <code>&#123;&#125;</code> 包裹，并且需要手动指定 <code>return</code> 语句。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 以Runnable接口为例</span><br><span class="hljs-type">Runnable</span> <span class="hljs-variable">runnable</span> <span class="hljs-operator">=</span> () -&gt; System.out.println(<span class="hljs-string">&quot;Hello, Lambda!&quot;</span>);<br><br>List&lt;String&gt; names = Arrays.asList(<span class="hljs-string">&quot;Alice&quot;</span>, <span class="hljs-string">&quot;Bob&quot;</span>, <span class="hljs-string">&quot;Charlie&quot;</span>);<br><br><span class="hljs-comment">// 使用Lambda表达式遍历集合</span><br>names.forEach(name -&gt; System.out.println(name));<br><br><span class="hljs-comment">// 使用Lambda表达式进行条件过滤</span><br>names.removeIf(name -&gt; name.length() &gt; <span class="hljs-number">4</span>);<br><br><span class="hljs-comment">// Comparator作为函数式接口使用Lambda表达式</span><br>List&lt;String&gt; names = Arrays.asList(<span class="hljs-string">&quot;Alice&quot;</span>, <span class="hljs-string">&quot;Bob&quot;</span>, <span class="hljs-string">&quot;Charlie&quot;</span>);<br>names.sort((s1, s2) -&gt; s1.compareTo(s2));<br></code></pre></td></tr></table></figure>
+
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><p>正则表达式（Regular Expression，简称 regex 或 regexp）是一种用于匹配字符串的模式描述工具。它是由字符和特殊字符组成的字符串，用于定义搜索模式。正则表达式在文本处理、字符串匹配和替换等方面非常强大，几乎所有主流编程语言都支持正则表达式操作。</p>
+<p>以下是一些正则表达式的基本概念和常见用法：</p>
+<ol>
+<li><strong>普通字符：</strong> 大多数字符在正则表达式中都是普通字符，它们匹配它们自身。例如，正则表达式 <code>abc</code> 匹配字符串中的 “abc”。</li>
+<li><strong>元字符：</strong> 正则表达式中有一些特殊字符称为元字符，它们具有特殊的含义。例如：<ul>
+<li><code>.</code>：匹配任意一个字符（除了换行符）。</li>
+<li><code>^</code>：匹配字符串的开始。</li>
+<li><code>$</code>：匹配字符串的结束。</li>
+<li><code>*</code>：匹配前一个字符的零次或多次。</li>
+<li><code>+</code>：匹配前一个字符的一次或多次。</li>
+<li><code>?</code>：匹配前一个字符的零次或一次。</li>
+<li><code>[]</code>：字符类，匹配方括号中的任意一个字符。</li>
+<li><code>|</code>：或操作，匹配两边任意一边的内容。</li>
+</ul>
+</li>
+<li><strong>字符类：</strong> 使用方括号 <code>[]</code> 来定义一个字符类，表示匹配其中的任何一个字符。例如，<code>[aeiou]</code> 可以匹配任何一个元音字母。</li>
+<li><strong>反义字符类：</strong> 使用 <code>^</code> 在字符类的开头表示反义，即匹配不在字符类中的任何字符。例如，<code>[^0-9]</code> 表示匹配非数字字符。</li>
+<li><strong>预定义字符类：</strong> 有一些常用的字符类有特殊的缩写，如：<ul>
+<li><code>\d</code>：匹配任意数字（相当于 <code>[0-9]</code>）。</li>
+<li><code>\w</code>：匹配任意字母数字字符（相当于 <code>[a-zA-Z0-9]</code>）。</li>
+<li><code>\s</code>：匹配任意空白字符（空格、制表符等）。</li>
+</ul>
+</li>
+<li><strong>量词：</strong> 用来指定一个模式的匹配次数。<ul>
+<li><code>&#123;n&#125;</code>：匹配前一个字符恰好 n 次。</li>
+<li><code>&#123;n,&#125;</code>：匹配前一个字符至少 n 次。</li>
+<li><code>&#123;n,m&#125;</code>：匹配前一个字符至少 n 次，但不超过 m 次。</li>
+</ul>
+</li>
+<li><strong>分组：</strong> 使用圆括号 <code>()</code> 可以将一系列字符作为一个整体进行处理。例如，<code>(ab)+</code> 可以匹配 “ab”、”abab”、”ababab” 等。</li>
+<li><strong>转义字符：</strong> 使用反斜杠 <code>\</code> 来转义元字符，使其失去特殊含义，变成普通字符。例如，<code>\.</code> 匹配实际的点而不是任意字符。</li>
+<li><strong>匹配模式：</strong> 有时需要指定匹配模式，如大小写不敏感匹配。在一些正则表达式引擎中，可以使用 <code>i</code> 表示不区分大小写，<code>m</code> 表示多行模式等。</li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB/" class="print-no-link">#知识分享</a>
+      
+        <a href="/tags/Java/" class="print-no-link">#Java</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Java语法糖</div>
+      <div>https://2536184321.github.io/2023/09/22/Java语法/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>cky</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年9月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/10/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" title="代码随想录刷题总结">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">代码随想录刷题总结</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/10/22/842%E7%9C%9F%E9%A2%98%E7%AC%94%E8%AE%B0/" title="842真题笔记">
+                        <span class="hidden-mobile">842真题笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"wgfsPZWfoXfOqvezQZHFjDhw-gzGzoHsz","appKey":"tFlCmTLupWOqs9boV829IZWY","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,874 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="cky">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="设计模式 依赖和关联（简单理解）：当A使用B作为变量或者方法参数，叫依赖关系。当A使用B作为类属性，则叫关联关系，关联关系是一种强依赖关系。 多态的向上转型：父类类型 父类引用名 &#x3D; new 子类类型(); 编译阶段看左边的父类型，所以不能调用子类特有的成员，否则编译不通过 运行阶段看右边的子类型，调用方法从子类开始查找，一般调用子类重写的方法，属性无重写    1. 单例模式 理解：单">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式总结">
+<meta property="og:url" content="https://2536184321.github.io/2022/10/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="cky-blog">
+<meta property="og:description" content="设计模式 依赖和关联（简单理解）：当A使用B作为变量或者方法参数，叫依赖关系。当A使用B作为类属性，则叫关联关系，关联关系是一种强依赖关系。 多态的向上转型：父类类型 父类引用名 &#x3D; new 子类类型(); 编译阶段看左边的父类型，所以不能调用子类特有的成员，否则编译不通过 运行阶段看右边的子类型，调用方法从子类开始查找，一般调用子类重写的方法，属性无重写    1. 单例模式 理解：单">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-10-22T06:28:37.000Z">
+<meta property="article:modified_time" content="2024-02-09T10:07:25.444Z">
+<meta property="article:author" content="cky">
+<meta property="article:tag" content="知识分享">
+<meta property="article:tag" content="考研">
+<meta property="article:tag" content="设计模式">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>设计模式总结 - cky-blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"2536184321.github.io","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="设计模式总结"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-10-22 14:28" pubdate>
+          2022年10月22日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          4.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          40 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">设计模式总结</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><ul>
+<li>依赖和关联（简单理解）：当A使用B作为变量或者方法参数，叫依赖关系。当A使用B作为类属性，则叫关联关系，关联关系是一种强依赖关系。</li>
+<li>多态的向上转型：父类类型 父类引用名 &#x3D; new 子类类型();<ul>
+<li>编译阶段看左边的父类型，所以不能调用子类特有的成员，否则编译不通过</li>
+<li>运行阶段看右边的子类型，调用方法从子类开始查找，一般调用子类重写的方法，属性无重写</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-单例模式"><a href="#1-单例模式" class="headerlink" title="1. 单例模式"></a>1. 单例模式</h2><ul>
+<li><p>理解：单例模式确保某一个类只有一个实例，自行实例化，给系统提供全局访问方法</p>
+</li>
+<li><p>例子：任务管理器、身份证、打印池</p>
+</li>
+<li><p>优缺点</p>
+<ul>
+<li>缺点：违反“单一职责原则”</li>
+</ul>
+</li>
+<li><p>类图：见书</p>
+</li>
+<li><p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Singleton</span><br>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">Singleton</span> <span class="hljs-variable">instance</span> <span class="hljs-operator">=</span> <span class="hljs-literal">null</span>; <span class="hljs-comment">// 静态私有成员变量</span><br>    <span class="hljs-comment">// 私有构造函数</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-title function_">Singleton</span><span class="hljs-params">()</span>&#123;<br>        <br>    &#125;<br>    <span class="hljs-comment">// 静态公有工厂方法，返回唯一实例</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Singleton <span class="hljs-title function_">getInstance</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-keyword">if</span>(instance == <span class="hljs-literal">null</span>)<br>            instance = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Singleton</span>();<br>        <span class="hljs-keyword">return</span> instance;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
+<li><p>测试：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs jav">public class Singleton&#123;<br>	public static void main(String a[])&#123;<br>        Singleton s1 = Singleton.getInstance();<br>        Singleton s2 = Singleton.getInstance();<br>        System.out.println(s1 == s2);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="2-迭代器模式"><a href="#2-迭代器模式" class="headerlink" title="2. 迭代器模式"></a>2. 迭代器模式</h2><ul>
+<li><p>理解：<strong>聚合对象有两个功能：一是存储内部数据，二是遍历内部数据。把遍历行为提取成为迭代器。</strong></p>
+</li>
+<li><p>大概率只考察类图：抽象和具体迭代器 and 抽象和具体聚合类</p>
+</li>
+<li><p>例子：迭代器——电视遥控器    聚合类————电视机 </p>
+</li>
+<li><p>代码理解：</p>
+<ul>
+<li>抽象迭代器只有抽象迭代方法声明，抽象聚合类只有抽象创建迭代器方法声明 </li>
+<li>具体聚合类：一是有数据，二是实现创建具体迭代器（返回一个具体迭代器对象），三是<strong>包含具体迭代器的类</strong>（即内部类的方式，也可以用另一种方式，单独写一个具体迭代器类，初始化需要具体聚合类参数）</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-策略模式"><a href="#3-策略模式" class="headerlink" title="3. 策略模式"></a>3. 策略模式</h2><ul>
+<li><p>理解：将一系列算法封装起来，由环境类（使用算法的角色）选择使用哪种算法</p>
+</li>
+<li><p>例子：环境类（数组处理类）、抽象策略类、具体策略类（冒泡插入选择排序）</p>
+</li>
+<li><p>代码理解：</p>
+<ul>
+<li>环境类有set方法，用于设置具体策略类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Context</span>&#123; <span class="hljs-comment">// 环境类</span><br>	<span class="hljs-keyword">private</span> Strategy strategy;<br>	<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setStrategy</span><span class="hljs-params">(Strategy strategy)</span>&#123;<br>		<span class="hljs-built_in">this</span>.strategy = strategy;<br>	&#125;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">contextAlgorithm</span><span class="hljs-params">(...)</span>&#123;<br>		strategy.algorithm(...);<br>	&#125;<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Strategy</span>&#123; <span class="hljs-comment">// 抽象策略类 or 策略类接口</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">algotithm</span><span class="hljs-params">(...)</span>;<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StrategyA</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Strategy</span>&#123; <span class="hljs-comment">// 具体策略类A</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">algotithm</span><span class="hljs-params">(...)</span>&#123;<br>        ...<br>    &#125;;<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StrategyB</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Strategy</span>&#123; <span class="hljs-comment">// 具体策略类B</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">algotithm</span><span class="hljs-params">(...)</span>&#123;<br>        ...<br>    &#125;;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+</li>
+<li><p>测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Client</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">Context</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Context</span>();<br>        <span class="hljs-type">StrategyA</span> <span class="hljs-variable">sa</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StrategyA</span>();<br>        c.setStrategy(sa);<br>        c.contextAlgorithm(...);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="4-工厂模式"><a href="#4-工厂模式" class="headerlink" title="4. 工厂模式"></a>4. 工厂模式</h2><ul>
+<li>三个模式之间的关系：<ul>
+<li>当抽象工厂模式每一个具体工厂类只创造一个产品对象，抽象工厂退化为工厂方法模式</li>
+<li>当工厂方法模式抽象工厂与具体工厂合并，只有一个统一的工厂来创建产品对象，工厂方法模式退化为简单工厂模式</li>
+</ul>
+</li>
+<li>关于抽象工厂模式是否符合开闭原则<ul>
+<li>如果增加产品族（由一个工厂生产的所有商品），只需要增加具体工厂，符合OCP</li>
+<li>如果增加产品等级结构（同一种商品），要修改所有工厂类，不符合OCP</li>
+</ul>
+</li>
+<li>关于工厂模式与策略模式的比较：工厂模式用于创建对象，策略模式用于选择各种方法</li>
+<li>工厂方法UML图：</li>
+</ul>
+<h2 id="5-观察者模式"><a href="#5-观察者模式" class="headerlink" title="5. 观察者模式"></a>5. 观察者模式</h2><ul>
+<li><p>很好理解</p>
+</li>
+<li><p>例子：主题类（猫），观察者（老鼠、狗）猫叫后老鼠和狗都有动作</p>
+</li>
+<li><p>类图：抽象主题（观察者数组、增加、删除观察者）、抽象观察者、具体主题（提醒观察者）、具体观察者</p>
+</li>
+<li><p>代码示例：</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 抽象目标类</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MySubject</span> &#123;<br>	<span class="hljs-keyword">protected</span> <span class="hljs-type">ArrayList</span> <span class="hljs-variable">observers</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>();<br>	<br>	<span class="hljs-comment">// 注册观察者</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">attach</span><span class="hljs-params">(MyObserver observer)</span> &#123;<br>		observers.add(observer);<br>	&#125;<br>	<br>	<span class="hljs-comment">// 删除观察者</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">detach</span><span class="hljs-params">(MyObserver observer)</span> &#123;<br>		observers.remove(observer);<br>	&#125;<br>	<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">cry</span><span class="hljs-params">()</span>;<br>&#125;<br><br><span class="hljs-comment">// 抽象观察者（接口）</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">MyObserver</span> &#123;<br>	<span class="hljs-keyword">void</span> <span class="hljs-title function_">response</span><span class="hljs-params">()</span>;<br>&#125;<br><br><span class="hljs-comment">// 具体主题</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Cat</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">MySubject</span>&#123;<br><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">cry</span><span class="hljs-params">()</span> &#123;<br>		System.out.print(<span class="hljs-string">&quot;猫叫！！！&quot;</span>);<br>		System.out.print(<span class="hljs-string">&quot;---------------------&quot;</span>);<br>		<br>		<span class="hljs-keyword">for</span>(Object obs:observers) &#123;<br>			((MyObserver)obs).response();<br>		&#125;<br>		<br>	&#125;<br>	<br>&#125;<br><span class="hljs-comment">// 具体观察者</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Dog</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">MyObserver</span>&#123;<br><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">response</span><span class="hljs-params">()</span> &#123;<br>		<span class="hljs-comment">// TODO Auto-generated method stub</span><br>		System.out.print(<span class="hljs-string">&quot;狗也开始叫！！！&quot;</span>);<br>	&#125;<br><br>&#125;<br><span class="hljs-comment">// 具体观察者2</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Mouse</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">MyObserver</span>&#123;<br><br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">response</span><span class="hljs-params">()</span> &#123;<br>		<span class="hljs-comment">// TODO Auto-generated method stub</span><br>		System.out.print(<span class="hljs-string">&quot;老鼠赶紧逃跑！&quot;</span>);<br>	&#125;<br><br>&#125;<br><span class="hljs-comment">// 客户端测试类</span><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Client</span> &#123;<br><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>		<span class="hljs-type">MySubject</span> <span class="hljs-variable">subject</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Cat</span>();<br>		<br>		MyObserver obs1, obs2, obs3;<br>		obs1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Mouse</span>();<br>		obs2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Mouse</span>();<br>		obs3 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Dog</span>();<br>		<br>		subject.attach(obs1);<br>		subject.attach(obs2);<br>		subject.attach(obs3);<br>		<br>		subject.cry();<br>		<br>		subject.detach(obs3);<br>		<br>		subject.cry();<br>	&#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h2 id="6-建造者模式"><a href="#6-建造者模式" class="headerlink" title="6. 建造者模式"></a>6. 建造者模式</h2><ul>
+<li>和工厂模式很像，也是对象创建型模式，创建复杂的对象，关注各个配件的创建，有一个指挥者</li>
+</ul>
+<h2 id="7-原型模式"><a href="#7-原型模式" class="headerlink" title="7. 原型模式"></a>7. 原型模式</h2><ul>
+<li>通过复制(clone)原型来创建对象</li>
+</ul>
+<h2 id="8-适配器模式"><a href="#8-适配器模式" class="headerlink" title="8. 适配器模式"></a>8. 适配器模式</h2><ul>
+<li><p>让目标类可以做适配类的行为，类适配要用接口，对象适配只用继承</p>
+</li>
+<li><p>分为类适配器和对象适配器</p>
+<ul>
+<li>类适配器实现目标类，继承适配类的接口（比如让robot可以学dog叫，因为狗叫是dog已实现的方法，所以继承dog，实现robot）（抽象和实现的区别：抽象可以选择父类方法调用，实现必须实现接口所有方法）</li>
+<li>对象适配器继承目标类，关联适配类（把适配类当作变量）</li>
+</ul>
+</li>
+<li><p>使用时候，用目标类作为父类创建适配器</p>
+</li>
+<li><p>类图：</p>
+</li>
+</ul>
+<h2 id="9-桥接模式"><a href="#9-桥接模式" class="headerlink" title="9. 桥接模式"></a>9. 桥接模式</h2><ul>
+<li><p>一个类有两个独立变化的维度，把两个维度分离开，独立扩展</p>
+</li>
+<li><p>抽象化：把类的共同性质抽取出来形成抽象类，比如不同颜色的毛笔都是毛笔</p>
+</li>
+<li><p>实现类：另一个维度的实现部分，比如毛笔的颜色</p>
+</li>
+<li><p>抽象类与实现类有聚合关系（桥）</p>
+</li>
+<li><p>例子：不同操作系统上播放多种格式的视频文件、描述不同制造商以及制造的电器种类</p>
+</li>
+<li><p>类图</p>
+</li>
+</ul>
+<h2 id="10-组合模式"><a href="#10-组合模式" class="headerlink" title="10. 组合模式"></a>10. 组合模式</h2><ul>
+<li><p>想到组合模式就应该想到树形结构图，对叶子和容器的使用要有一致性</p>
+</li>
+<li><p>用抽象构件作为叶子和容器的抽象，容器和构件建立组合关系，容器有构件的数据可以遍历</p>
+</li>
+<li><p>例子：水果盘里有水果和水果盘；文件夹浏览和文件浏览方式；</p>
+</li>
+<li><p>类图</p>
+</li>
+</ul>
+<h2 id="11-装饰模式"><a href="#11-装饰模式" class="headerlink" title="11. 装饰模式"></a>11. 装饰模式</h2><ul>
+<li><p>对原有对象的功能进行扩展</p>
+</li>
+<li><p>对类功能进行复用时应该多用关联关系，少用继承关系</p>
+</li>
+<li><p>UML图和组合模式很像，但原理不同</p>
+</li>
+<li><p>抽象构件有一个默认具体构件类，比如煎饼果子默认加蛋</p>
+</li>
+<li><p>理解：咖啡加很多调料，如果用继承关系，把各种调料方式的咖啡都建立一个子类，会有类爆炸。所以使用装饰模式，建立各种调料的类，用调料调用咖啡进行装饰。</p>
+</li>
+<li><p>例子：变形金刚；</p>
+</li>
+<li><p>类图（抽象装饰类和具体装饰类的初始化有说法）</p>
+</li>
+</ul>
+<h2 id="12-外观模式"><a href="#12-外观模式" class="headerlink" title="12.  外观模式"></a>12.  外观模式</h2><ul>
+<li><p>对外提供一个统一的接口用来访问子系统</p>
+</li>
+<li><p>对客户屏蔽子系统组件，降低客户类与子系统类的耦合度</p>
+</li>
+<li><p>eg：网站首页有各个子栏目；电源总开关控制很多子开关</p>
+</li>
+<li><p>UML图很简单，外观类关联很多子系统类</p>
+</li>
+<li><p>违反OCP，增加子系统会修改外观类代码，抽象外观模式符合OCP</p>
+</li>
+<li><p>体现单一职责，体现迪米特</p>
+</li>
+</ul>
+<h2 id="13-代理模式"><a href="#13-代理模式" class="headerlink" title="13. 代理模式"></a>13. 代理模式</h2><ul>
+<li><p>代理对象控制对对象的访问</p>
+</li>
+<li><p>很简单：代理对象有对象的变量，自己有控制等级变量，根据控制等级，调用对象的方法。因为要满足OCP所以继承一个抽象对象</p>
+</li>
+<li><p>客户端调用代理对象，完成对对象的代理访问</p>
+</li>
+</ul>
+<h2 id="14-命令模式"><a href="#14-命令模式" class="headerlink" title="14. 命令模式"></a>14. 命令模式</h2><ul>
+<li><p>将一个请求封装成一个对象，发送请求的对象只需要知道如何发送请求，不必知道如何完成请求</p>
+</li>
+<li><p>分为请求发送控制者和请求接收者，抽象请求和具体请求。发送者有很多请求对象，请求对象有发送接收者成员变量。发送者调用请求，请求调用接收者的方法</p>
+</li>
+<li><p>客户端建立请求控制对象，建立请求，初始化请求控制对象</p>
+</li>
+</ul>
+<h2 id="15-中介者模式"><a href="#15-中介者模式" class="headerlink" title="15. 中介者模式"></a>15. 中介者模式</h2><ul>
+<li><p>中介者模式可以使对象之间的关系数量急剧减少，变成以中介者为中心的星状结构（私聊变群聊）</p>
+</li>
+<li><p>分为抽象中介和具体中介、抽象同事和具体同事，具体中介有同事数组作为成员变量，抽象同事有抽象中介作为成员变量，用来调用中介的方法进行通信</p>
+</li>
+<li><p>考代码的话稍微有点复杂，画类图很简单</p>
+</li>
+</ul>
+<h2 id="16-备忘录模式"><a href="#16-备忘录模式" class="headerlink" title="16. 备忘录模式"></a>16. 备忘录模式</h2><h2 id="17-状态模式"><a href="#17-状态模式" class="headerlink" title="17. 状态模式"></a>17. 状态模式</h2><ul>
+<li><p>对象在不同状态下的行为不同，且可以自动转换状态</p>
+</li>
+<li><p>例子：论坛用户等级、银行账户状态、两个开关同时开关</p>
+</li>
+<li><p>优缺点</p>
+<ul>
+<li>缺点：对开闭原则支持不太好，可以切换状态的状态模式，增加状态需要修改负责状态转换的代码</li>
+</ul>
+</li>
+<li><p>类图包括环境类（拥有状态的对象）、抽象状态类（封装与状态相关的行为）、具体状态类</p>
+</li>
+</ul>
+<h2 id="18-职责链模式"><a href="#18-职责链模式" class="headerlink" title="18. 职责链模式"></a>18. 职责链模式</h2><h2 id="19-享元模式"><a href="#19-享元模式" class="headerlink" title="19. 享元模式"></a>19. 享元模式</h2><h2 id="20-解释器模式"><a href="#20-解释器模式" class="headerlink" title="20. 解释器模式"></a>20. 解释器模式</h2><h2 id="21-模板方法模式"><a href="#21-模板方法模式" class="headerlink" title="21. 模板方法模式"></a>21. 模板方法模式</h2><h2 id="22-访问者模式"><a href="#22-访问者模式" class="headerlink" title="22. 访问者模式"></a>22. 访问者模式</h2>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="category-chain-item">设计模式</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%80%83%E7%A0%94/" class="category-chain-item">考研</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB/" class="print-no-link">#知识分享</a>
+      
+        <a href="/tags/%E8%80%83%E7%A0%94/" class="print-no-link">#考研</a>
+      
+        <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="print-no-link">#设计模式</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>设计模式总结</div>
+      <div>https://2536184321.github.io/2022/10/22/设计模式/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>cky</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年10月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/10/22/%E8%AE%A1%E7%BD%91/" title="842计网">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">842计网</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"wgfsPZWfoXfOqvezQZHFjDhw-gzGzoHsz","appKey":"tFlCmTLupWOqs9boV829IZWY","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
