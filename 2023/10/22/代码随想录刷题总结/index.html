@@ -1,0 +1,792 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="cky">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="代码随想录刷题总结最近把随想录剩下的题目都过了一遍。但是很多题目，我看了题解才会做，可能过几天就忘了。所以要多多重复，但要是每次复习都从头到尾一字不漏的看一遍，太浪费时间。 于是，我认为应该主动去总结，复习的时候写下自己的理解和方法论，方便之后的巩固，节省很多时间，减轻记忆负担。 数组长度最小的子数组，使用滑动窗口，滑动窗口的题目主要关注左边元素弹出，右边元素加入，窗口内状态的变化。这个题要求窗口">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码随想录刷题总结">
+<meta property="og:url" content="https://2536184321.github.io/2023/10/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:site_name" content="cky-blog">
+<meta property="og:description" content="代码随想录刷题总结最近把随想录剩下的题目都过了一遍。但是很多题目，我看了题解才会做，可能过几天就忘了。所以要多多重复，但要是每次复习都从头到尾一字不漏的看一遍，太浪费时间。 于是，我认为应该主动去总结，复习的时候写下自己的理解和方法论，方便之后的巩固，节省很多时间，减轻记忆负担。 数组长度最小的子数组，使用滑动窗口，滑动窗口的题目主要关注左边元素弹出，右边元素加入，窗口内状态的变化。这个题要求窗口">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-10-22T06:28:37.000Z">
+<meta property="article:modified_time" content="2024-02-09T04:02:24.536Z">
+<meta property="article:author" content="cky">
+<meta property="article:tag" content="学习感悟">
+<meta property="article:tag" content="知识分享">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>代码随想录刷题总结 - cky-blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"2536184321.github.io","root":"/","version":"1.9.5-a","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="代码随想录刷题总结"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-10-22 14:28" pubdate>
+          2023年10月22日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          9.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          80 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">代码随想录刷题总结</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="代码随想录刷题总结"><a href="#代码随想录刷题总结" class="headerlink" title="代码随想录刷题总结"></a>代码随想录刷题总结</h1><p>最近把随想录剩下的题目都过了一遍。但是很多题目，我看了题解才会做，可能过几天就忘了。所以要多多重复，但要是每次复习都从头到尾一字不漏的看一遍，太浪费时间。</p>
+<p>于是，我认为应该主动去总结，复习的时候写下自己的理解和方法论，方便之后的巩固，节省很多时间，减轻记忆负担。</p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-size-subarray-sum/">长度最小的子数组</a>，使用滑动窗口，滑动窗口的题目主要关注左边元素弹出，右边元素加入，窗口内状态的变化。这个题要求窗口最小长度，所以在满足和大于target的基础上，尽量弹出左侧元素。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/spiral-matrix/"> 螺旋矩阵</a>，模拟，没有什么套路。直接用评论区大佬的题解，首先设定上下左右边界，其次向右移动到最右，此时第一行因为已经使用过了，可以将其从图中删去，体现在代码中就是重新定义上边界，判断若重新定义后，上下边界交错，表明螺旋矩阵遍历结束，跳出循环，返回答案，若上下边界不交错，则遍历还未结束，接着向下向左向上移动，操作过程与第一，二步同理，不断循环以上步骤，直到某两条边界交错，跳出循环，返回答案。</p>
+<h2 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/4sum-ii/">四数相加 II</a>，有四组数字，求每组取一个数字和为0的组合数量。A组和B组为一组，n方复杂度遍历和作为key，下标记录在map里。C组和D组为一组，求和，找map里是否有合适的记录。因为不需要去重，比<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/4sum/">四数之和</a>简单很多。</p>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><h3 id="KMP"><a href="#KMP" class="headerlink" title="KMP"></a>KMP</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/">找出字符串中第一个匹配项的下标</a>，这算法学一次忘一次。求文本串里第一个模板串的位置，首先要根据模板串求一个next数组，数组存的是下标之前的最长公共前后缀。得到next数组之后，遍历文本串当字符不匹配时，把指向模板串的下标调整到next数组指向位置。这样保证总共遍历一次文本串。时间复杂度变成了n + m，比n * m少得多。</p>
+<p>求next数组也需要使用next数组的特性，和主函数一个套路，代码差不多可以背。</p>
+<h2 id="双指针法-链表"><a href="#双指针法-链表" class="headerlink" title="双指针法 链表"></a>双指针法 链表</h2><p>双指针法，可以解决<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-element/">移除元素</a>、<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-string/">反转字符串</a>、<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-words-in-a-string/">反转字符串中的单词</a>（反转再反转），可以用java内置的方法来快速处理（正则匹配、链接、翻转）。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/reverse-linked-list/">反转链表</a>，迭代法是初始化空结点，循环链表指向前一个元素。递归法不用记。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/">删除链表的倒数第 N 个结点</a>，一次遍历找到结点和前置结点就可以了。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-linked-lists/">相交链表</a>常规方法是找到两个链表差值，从相同起点出发，比较是否相同。简单方法是，让两个指针同时出发，走完自己的路再走对方的，如果相等且不为空值就是交点。链表题目最好要画图理解清楚。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/linked-list-cycle-ii/">环形链表 II</a>让找到环的入口结点，首先要用快慢指针判断是否有环，如果有环，相遇结点和头节点同时出发，最终相遇的结点就是环的入口。</p>
+<p>双指针经典题目当然不能缺少<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/3sum/"> 三数之和</a> <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/4sum/">四数之和</a>这种nSum题目了。套路都是一样的，先排序好数组，<strong>三数之和就是遍历一个数，另外两个用双指针，四数之和就是两层循环遍历两个数，另外两个用双指针</strong>。</p>
+<p>遍历数字<strong>去重</strong>一般都是<code>if (i &gt; 0  &amp;&amp; nums[i] == nums[i - 1]) continue;</code>和回溯的题目一个道理。而<strong>双指针控制左右数字去重是在一组数据符合要求之后，去掉左右重复的数字</strong>，不能在其他情况下去重。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lru-cache/">LRU</a>，这个经典题目，要用双链表、哈希、头尾指针来解决。尤其是头尾指针，因为我们需要用尾指针保证O1复杂度删除结点。初始化需要注意，<code>head = new DLinkedNode();   tail = new DLinkedNode();   head.next = tail;   tail.next = head;</code>思路是使用的结点都放在头结点后。</p>
+<h2 id="栈与队列"><a href="#栈与队列" class="headerlink" title="栈与队列"></a>栈与队列</h2><p>栈和队列都能互相实现，两个栈可以实现一个队列，两个队列也可以实现一个栈（一个队列输出的时候把所有元素再输入到队尾也可以）。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-parentheses/">有效的括号</a>和<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/evaluate-reverse-polish-notation/">逆波兰式求值</a>，都可以用栈来实现。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/min-stack/">最小栈</a>，这个题目有一个大坑，Integer对象的比较，不是简单的int值比较，所以要用equals才会比较正确。题目思路是，用两个栈，第一个栈正常操作，第二个栈维护最小值，当有更小值push，没有则不操作。</p>
+<h3 id="单调队列"><a href="#单调队列" class="headerlink" title="单调队列"></a>单调队列</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sliding-window-maximum/">滑动窗口最大值</a>，这个题目使用了单调队列。单调队列不是优先队列，不是简单的把窗口里的元素单调排列。这一点和单调栈类似。我们需要一个双端队列来保证元素可以从队列两边弹出。1.加入元素时，队尾小于元素的全部从右边弹出。2.删除元素时，如果队头元素相等则从左边弹出。这样，我们才可以保证，队列头部的元素是滑动窗口最大值。</p>
+<h3 id="优先队列"><a href="#优先队列" class="headerlink" title="优先队列"></a>优先队列</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/top-k-frequent-elements/">前 K 个高频元素</a>，这个题目使用了优先队列。优先队列定义的时候，要写清楚排序规则。并且使用了map的遍历操作，方法要记得。</p>
+<h2 id="二叉树"><a href="#二叉树" class="headerlink" title="二叉树"></a>二叉树</h2><p>二叉树的题目，首先要选择遍历方式，前中后序遍历和层序遍历。基本遍历代码这里就不放了，比较简单。我们要了解不同遍历方式的特点，灵活运用在解题上。</p>
+<h3 id="层序遍历"><a href="#层序遍历" class="headerlink" title="层序遍历"></a>层序遍历</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-bottom-left-tree-value/">求树最后一行最左边的值</a>，很明显要用层序遍历。但是我们可以从右往左的遍历，这样最后一个元素就是所求答案。</p>
+<h3 id="前中后遍历"><a href="#前中后遍历" class="headerlink" title="前中后遍历"></a>前中后遍历</h3><p>二叉树的题目大多是选择一种合适递归遍历方式，<strong>核心是处理左右根三个结点</strong>。<strong>通常要处理四种情况：1. 根节点为null 2. 没有孩子 3. 只有一个孩子 4. 有左右孩子</strong>。简单情况下，后三种情况可以直接直接递归左右孩子，不做细分。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/">二叉树的最大深度</a>，用的后序遍历，四种情况可以简化为1和其他。也可以用<strong>前序遍历，和普通的回溯套路是一样的</strong>，用变量去记录深度，返回最大的深度。<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/path-sum/">路径总和</a>，也类似的思路，代码简单。其实不用去纠结前序还是后序遍历，理解成简单的递归就可以了，能解决问题就行。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-depth-of-binary-tree/">二叉树的最小深度</a>，要注意最小深度是最近叶子结点到根节点的距离。所以3情况不能返回1，而是返回孩子深度+1。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/balanced-binary-tree/">平衡二叉树</a>，简单方法是左右孩子都调用<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-depth-of-binary-tree/">二叉树的最大深度</a>获取高度判断是否平衡，时间复杂度n方很高。另一种方法是把求最大深度的函数改（先获取左右孩子深度，然后再处理返回值判断是否平衡），因为底层二叉树不平衡的话，整个树就不平衡。</p>
+<h3 id="特殊题型"><a href="#特殊题型" class="headerlink" title="特殊题型"></a>特殊题型</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/symmetric-tree/">对称二叉树</a>，判断一个二叉树是否是镜像对称的。这个题目比较特殊，不同于普通遍历就传一个参数，<strong>要传入两个结点进行比较</strong>。<code>return p.val == q.val &amp;&amp; check(p.left, q.right) &amp;&amp; check(p.right, q.left)</code></p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/count-complete-tree-nodes/">完全二叉树的节点个数</a>，求节点个数当然可以n复杂度，但是<strong>完全二叉树有个规则，如果沿着左一直数和沿着右一直数相同的话，可以用公式直接求节点数量</strong>。如果不同，可以再去递归遍历左右孩子，个数相加。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">从中序和后序遍历序列构造二叉树</a>，后序数组中找到最后一个值作为根，分割中序数组，根据结果分割后序数组，接着再从两个后序数组中找到最后一个元素作为左右孩子，递归进行。1.分割的时候，要统一规则，比如全按照左闭右开2. 分割后序数组要按照前序分完之后的数组大小3. 递归参数要写对</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/">二叉树的最近公共祖先</a>，如果查到<strong>p</strong>或者<strong>q</strong>就返回结点，后序遍历，如果左右孩子都有返回值就说明找到了。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/">将有序数组转换为二叉搜索树</a>，类似上面那个构造二叉树的方法，递归返回根节点，本题根节点需要返回中间位置的数组元素。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/">二叉树展开为链表</a>，先序遍历，结点右孩子指向下一个遍历元素，但是会丢失原有右孩子。先序遍历的逆序，用右指针指向前一个结点即可。</p>
+<h2 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h2><p>回溯套路很固定，我通常的做法就是用path来记录过程，res来记录结果。要考虑的问题是结束回溯的条件、选择路径、复原路径。有的题目还需要考虑一下剪枝的问题。简而言之，回溯可以看成树型结构，哪些结点是一层，哪些结点是一条路径，这些需要考虑清楚。</p>
+<h3 id="组合-or-排列"><a href="#组合-or-排列" class="headerlink" title="组合 or 排列"></a>组合 or 排列</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combinations/">组合</a>问题，求从n个数中选择k个数的组合，代码结构很简单，要考虑剪枝（控制选择范围）。</p>
+<p>组合跟排列的区别在于，<strong>组合需要排序并且控制选择的起始点。而排列每层都可以选全部选项，但要保证选项没有被选过。</strong></p>
+<p>比如<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum/">组合总和</a>这一题，如果误以为每层选择都可以选全部，那就犯错了。<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-ii/">组合总和II</a>这一题，相同元素只能选择一次，所以选择时要<strong>去重</strong>。去重，就是先把选项排列好，相同元素跳过。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutations/">全排列</a>使用的是没有重复的数字，<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutations-ii/">全排列II</a>使用的是可包含重复数字的序列。所以，后者也需要进行<strong>去重（排序+跳过）</strong>，同时因为是排列，也需要保证选项没被选过。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-ii/">组合总和II</a>和<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/permutations-ii/">全排列II</a>这两道题搞清楚，组合和排列是什么区别就比较明白了。</p>
+<h3 id="分割"><a href="#分割" class="headerlink" title="分割"></a>分割</h3><p>回溯题目，除了经典的组合排列问题，还有很多相似问题类型。比如<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/palindrome-partitioning/">分割回文串</a>，<strong>aab截取a、ab、aab相当于[1, 2, 3]中选择1、2、3的组合问题</strong>，也能通过回溯的套路解决。判断回文串要用双指针方法。<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/restore-ip-addresses/">复原IP地址</a>也是类似问题。回溯函数里传的是起始点，选项是终止点。</p>
+<h3 id="子集"><a href="#子集" class="headerlink" title="子集"></a>子集</h3><p>子集问题其实就是组合问题，记录所有结点，而不是只记录叶子结点。<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets/">子集</a>和<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subsets-ii/">子集II</a>。<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/non-decreasing-subsequences/">递增子序列</a>这个题有些特殊，因为我们需要去重，但是不能把原有数组进行排序。所以我们<strong>选择set来去重</strong>，每一层都有一个set记录。</p>
+<h3 id="棋盘问题"><a href="#棋盘问题" class="headerlink" title="棋盘问题"></a>棋盘问题</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/n-queens/">N皇后</a>和<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/sudoku-solver/">解数独</a>，两个题目都是针对一个二维棋盘，遍历每一个位置，选择一个选项，然后继续回溯。<strong>别忘了，回溯之后把位置重置</strong>。其实，我认为难点在于判断棋盘是否可行。</p>
+<h2 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h2><p>贪心没有固定套路，如果可以局部最优推出全局最优，举不出反例就可以用。所以还是要多看看贪心的题目，记住解题方法。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/assign-cookies/">分发饼干</a>，大饼干先要喂给胃口大的。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/wiggle-subsequence/">摆动序列</a>，答案就是只记录摆动的数量。要记录当前差值和前一个差值，当前差值不是0但前一个差值是0（平坡），符合要求，当前差值为0肯定不符合要求，不符合要求的时候，就不用更新前一个差值，相当于没有摆动，不做记录。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/gas-station/">加油站</a>，贪心思路是遍历每一天剩下的油，如果总和是负数则不能完成路线，遍历过程中负的最多的那一天的下一天就是起点。换一种思路，连续亏空最多的那一站，一定要最后走，等待前面所有正数填补</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/candy/">分发糖果</a>，这个问题不能一次遍历同时处理元素的左右糖果数量，会顾此失彼。先从前往后遍历，处理右边评分大于左边的情况，再从后往前遍历，处理左边评分大于右边的情况，并且第二次遍历的时候，要选择加一或者上次遍历结果的最大值（保证满足两次遍历关系）。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/queue-reconstruction-by-height/">根据身高重建队列</a>，题目明确一个元素要考虑两种维度的属性，常用解法就是先按照一种维度排序，再后续处理。按照身高降序排序，再按照另一个维度当作下标插入队列，就能解决。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/monotone-increasing-digits/">单调递增的数字</a>，贪心：从后往前数，如果前一个数字大于当前数字，则当前数字变为<strong>9</strong>，前一个数字减少，保证数字最大。例如339-&gt; 329-&gt;299</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/binary-tree-cameras/">监控二叉树</a>，这题是贪心和二叉树结合的难题。</p>
+<h3 id="区间问题"><a href="#区间问题" class="headerlink" title="区间问题"></a>区间问题</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/jump-game/">跳跃游戏</a>和<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/jump-game-ii/">跳跃游戏II</a>都是考虑区间动态覆盖范围的题目，每次跳跃都要更新这个最大覆盖范围。前者只需要最新范围大于数组长度就能判断，后者每次超过跳跃范围再更新并且记录跳跃次数。</p>
+<p>区间重叠问题，贪心也可以处理。<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/">用最少数量的箭引爆气球</a>意思是区间重叠的气球归为一组引爆。如何分组呢，我们首先把区间按照左边界排序，然后遍历左边界，左边界小于分组右边界的归为一组。缩小每个分组的右边界，<strong>重叠区间的右边界是不断在缩小的</strong>。具体代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java">Arrays.sort(points, (a, b) -&gt; Integer.compare(a[<span class="hljs-number">0</span>], b[<span class="hljs-number">0</span>]));<br><span class="hljs-type">int</span> <span class="hljs-variable">res</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br><span class="hljs-type">int</span> <span class="hljs-variable">right</span> <span class="hljs-operator">=</span> points[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]; <span class="hljs-comment">// 区间的右边界</span><br><span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; points.length; i++) &#123;<br>    <span class="hljs-keyword">if</span> (points[i][<span class="hljs-number">0</span>] &gt; right) &#123; <span class="hljs-comment">// 下一个分组</span><br>        res++;<br>        right = points[i][<span class="hljs-number">1</span>]; <span class="hljs-comment">// 下一个重叠分组的右边界</span><br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>        right = Math.min(points[i][<span class="hljs-number">1</span>], right); <span class="hljs-comment">// 不断缩小区间右边界</span><br>    &#125;<br>&#125;<br><span class="hljs-keyword">return</span> res;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/non-overlapping-intervals/">无重叠区间</a>也是类似解法，不断缩小重叠区间右边界，就可以保留最小区间。每个分组除了最小区间，其他的重叠区间都要移除。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/merge-intervals/">合并区间</a>和前面题目有点区别，因为合并的话要扩大区间右边界，而不是缩小了。<code>right = Math.max(right, intervals[i][1]);</code></p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-labels/">划分字母区间</a>这个题目如果用上述方法，复杂度至少也是nlogn，但是可以换一种方法，两次遍历得到结果。第一次遍历获取每个字母的最后位置，第二次遍历不断更新当前字符串的最后位置，遍历到相等位置就存。</p>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><p>动态规划，跟“状态”这一词分不开，复杂一点的题目，有好几个状态转换，dp数组的递归方程也有好几个。当然，也有很多简单题目。只要推导出递归方程，考虑好dp数组初始化，就可以解答。</p>
+<h3 id="背包问题"><a href="#背包问题" class="headerlink" title="背包问题"></a>背包问题</h3><p>背包问题，需要掌握01背包和完全背包，简单来说就是从固定的物品中选择一些装背包。01背包是同一物品只能选择一次，完全背包是可以选择多次。</p>
+<p>背包问题，有二维dp数组和一维dp数组两种写法。二维的<code>dp[i][j]</code>表示0 - i下标物品中取，放在容量为j的背包里，价值总和最大多少。递归方程是<code>dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - weight[i]] + value[i])</code>。用<strong>滚动数组转换为一维dp数组</strong>，代码就固定如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; weight.size(); i++) &#123; <span class="hljs-comment">// 求排列要外围遍历背包容量，求组合要外围遍历物品</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">j</span> <span class="hljs-operator">=</span> bagWeight; j &gt;= weight[i]; j--) &#123; <span class="hljs-comment">// 01背包遍历背包容量要倒序，保证物品不重复加入，完全背包要正序，可以重复加入同一物品</span><br>        dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);<br><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>背包问题的代码套路很固定，要先把题目转换为背包问题，解决就简单一半了。举一些转换为背包问题的例子如下：</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/partition-equal-subset-sum/">分割等和子集</a>，可以看作取集合元素装一半总和容量的背包，如果装满了就可以分割。所以说动态规划也不一定就是只作用于极值问题。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/last-stone-weight-ii/">最后一块石头重量II</a>，题目让两个一组碎石头，也可以转换为装一半总和背包的问题，尽量装满就可以保证剩下的碎石最小，也算是一个极值问题。</p>
+<p>背包问题，不是只有装满背包有多大价值一种类型，还可以求装满背包有多少中取法，<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/target-sum/">目标和</a>这个题目，先进行一些数学运算，然后转换为了求取法类型。要注意，dp[0]要初始化为1，递归方程改为<code>dp[j] += dp[j - nums[i]]</code>。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/ones-and-zeroes/">一和零</a>这个题，复杂度又有提升，需要同时满足两个维度的背包，所以dp数组上升为二维。</p>
+<p>背包问题，还有一个考法需要考虑——求排列数量，而不是组合数量。简而言之，<strong>求排列要外围遍历背包容量，求组合要外围遍历物品</strong>。比如，1，5 和 5， 1是不同排列，外围遍历物品只会出现1，5的组合。<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/word-break/">单词拆分</a></p>
+<p>完全背包的练习题有<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/combination-sum-iv/">组合总和IV</a>，<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/coin-change/">零钱兑换</a>，<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/perfect-squares/">完全平方数</a></p>
+<h3 id="打家劫舍"><a href="#打家劫舍" class="headerlink" title="打家劫舍"></a>打家劫舍</h3><p>打家劫舍这类问题递归方程较简单，因为相邻屋子不能偷，那么状态就是偷或者不偷，从隔一个或者前一个状态得到最大值。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber-ii/">打家劫舍II</a>有要求首尾不能同时偷，所以要处理多种情况，归为两种偷法，考虑首不考虑尾 and 考虑尾不考虑首，两种情况都偷一遍，取最大值。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/house-robber-iii/">打家劫舍III</a>规定结构为二叉树，树型dp怎么办？其实，考虑每个结点也无非两种状态，偷 or 不偷。解决方案是，采用后序遍历求每个结点偷或者不偷的最大值，并且要返回上一层。题解采用大小为2的数组，res[0]保存不偷，res[1]保存偷的最大值。</p>
+<h3 id="买卖股票"><a href="#买卖股票" class="headerlink" title="买卖股票"></a>买卖股票</h3><p>买卖股票问题，要获取最大利润。难度大的类型，要求我们明白动态规划的“状态”概念。</p>
+<p>首先是买卖一次，<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock/">最佳时机I</a>，很简单，只需要记录前面天数的最低价格，获取最高差价就可以。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/">买卖多次</a>，<strong>不对次数做出限制</strong>的话，也可以用贪心轻松解决。只要前后差价是正数就进行一次买卖。</p>
+<p>如果对次数做出限制，就需要我们构造“状态”了。参考打家劫舍题目，每个屋子都有偷和不偷两个状态。比如，<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/">最佳时机III</a>规定买卖2次，需要有5个状态。代码和解释如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// dp[i][0]无操作</span><br>   <span class="hljs-comment">// dp[i][1]第一次已持有 的现金</span><br>   <span class="hljs-comment">// dp[i][2]第一次已卖出 的现金</span><br>   <span class="hljs-comment">// dp[i][3]第二次已持有 的现金</span><br>   <span class="hljs-comment">// dp[i][4]第二次已卖出 的现金</span><br>   <span class="hljs-comment">// 答案一定是第二次已卖出 的现金，已经包括了一次或者零次（最后一天多次买卖）</span><br>   <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">maxProfit</span><span class="hljs-params">(<span class="hljs-type">int</span>[] prices)</span> &#123;<br>       <span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> prices.length;<br>       <span class="hljs-type">int</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[len][<span class="hljs-number">5</span>];<br>       dp[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>] = -prices[<span class="hljs-number">0</span>];<br>       dp[<span class="hljs-number">0</span>][<span class="hljs-number">3</span>] = -prices[<span class="hljs-number">0</span>];<br>       <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; i &lt; len; i++) &#123;<br>           <span class="hljs-comment">// 状态变换方程，要么继承前一天的状态，要么当天发生状态变化</span><br>           dp[i][<span class="hljs-number">1</span>] = Math.max(dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>], -prices[i]);<br>           dp[i][<span class="hljs-number">2</span>] = Math.max(dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">2</span>], dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">1</span>] + prices[i]);<br>           dp[i][<span class="hljs-number">3</span>] = Math.max(dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">3</span>], dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">2</span>] - prices[i]);<br>           dp[i][<span class="hljs-number">4</span>] = Math.max(dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">4</span>], dp[i - <span class="hljs-number">1</span>][<span class="hljs-number">3</span>] + prices[i]);<br>       &#125;<br>       <span class="hljs-keyword">return</span> dp[len - <span class="hljs-number">1</span>][<span class="hljs-number">4</span>];<br>   &#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iv/">最佳时机IV</a>，规定买卖k次，我们可以从上题总结出买卖k次的代码，有2 * k + 1个状态</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-with-cooldown/">最佳时机含冷冻期</a>，规定每次卖完股票有一天冷冻期，之后才能购买股票。做这个题目，第一步还是划分好状态。持有股票，未持有股票（继承上次未持有 and 今天卖出股票，只有今天卖出股票会导致冷冻期出现），冷冻期状态。所以有四个状态。后续操作都一样。</p>
+<h3 id="子序列"><a href="#子序列" class="headerlink" title="子序列"></a>子序列</h3><p>子序列的题目，重点在于构造二维dp数组，解决两个数组之间的问题。</p>
+<p>求两个数组的<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-length-of-repeated-subarray/">最长重复子数组</a>这一题，<strong>首先<code>dp[i][j]</code>代表<code>nums1[:i-1]</code>和<code>nums2[:j-1]</code>的最大公共后缀长度</strong>，这样定义可以简化代码。其次，递归方程是<code> if (nums1[i - 1] == nums2[j - 1]) dp[i][j] = dp[i - 1][j - 1] + 1;</code>这是经典题目，要牢记。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-common-subsequence/">最长公共子序列</a>和上题对比一下，dp数组定义一样，状态转移不一样。当前元素不同的话， <code> dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);</code> <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/uncrossed-lines/">不相交的线</a>这一题，看似没思路，但可以转换为这个题。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/maximum-subarray/">最大子序和</a>这个题目，可以用贪心只算正和，也可以用dp来对比当前元素和前面元素的和，比较简单。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/edit-distance/">编辑距离</a>是子序列的经典题目。我们先看有关的几个题目，<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/is-subsequence/">判断子序列</a>是要判断s是否为t的子序列，其实求出<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-common-subsequence/">最长公共子序列</a>为s的长度就可以判断了。通过这道题目可以看出，<strong>求最大公共子序列其实就是两个字符串都可以删除元素，判断子序列是t可以删除元素，s不可以</strong>。所以<code>dp[i][j] = dp[i][j - 1]</code>。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/delete-operation-for-two-strings/">两个字符串的删除操作</a>，想求两个字符串相同的最小步数，要求只用删除操作。可以用两个字符串长度总和减去<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-common-subsequence/">最长公共子序列</a>长度。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/distinct-subsequences/">不同的子序列</a>这一题是求s的子序列里有多少个t，比如rabbbit里有三个rabbit（删掉任一个b，都是不同的答案）。所以是s可以删掉，t不能删掉。<strong>匹配相同的时候，可以选择不匹配当前s[i - 1]。</strong>所以状态转移方程如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> (s[i - <span class="hljs-number">1</span>] == t[j - <span class="hljs-number">1</span>]) &#123;<br>    dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>] + dp[i - <span class="hljs-number">1</span>][j];<br>&#125; <span class="hljs-keyword">else</span> &#123;<br>    dp[i][j] = dp[i - <span class="hljs-number">1</span>][j];<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/edit-distance/">编辑距离</a>终于要解决了，要求两个字符串相同的最小步数，状态转移方程如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> (word1.charAt(i - <span class="hljs-number">1</span>) == word2.charAt(j - <span class="hljs-number">1</span>)) &#123;<br>    dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>]; <br>&#125; <span class="hljs-keyword">else</span> &#123;<br>    dp[i][j] = Math.min(Math.min(dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>], dp[i][j - <span class="hljs-number">1</span>]), dp[i - <span class="hljs-number">1</span>][j]) + <span class="hljs-number">1</span>; <span class="hljs-comment">// 删除相当于添加元素，修改元素在i-1 j-1基础上</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/decode-ways/">解码方法</a>，每个数字要么单独一个数字，要么与前一个组成数字。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/regular-expression-matching/">正则表达式匹配</a>，<code>dp[i][j]</code> 表示 s 的前 i 个字符是否能匹配 p 的前 j 个字符，一维是字符串，二维是表达式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">if</span> (pChar == sChar || pChar == <span class="hljs-string">&#x27;.&#x27;</span>) &#123;<br>                    <span class="hljs-comment">// 如果当前字符匹配，或者正则表达式中是 &#x27;.&#x27;，则可以选择匹配一个字符</span><br>                    dp[i][j] = dp[i - <span class="hljs-number">1</span>][j - <span class="hljs-number">1</span>];<br>                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (pChar == <span class="hljs-string">&#x27;*&#x27;</span>) &#123;<br>                    <span class="hljs-comment">// 如果当前正则表达式字符是 &#x27;*&#x27;，则有两种选择：</span><br>                    <span class="hljs-comment">// 1. 匹配零次前面的字符，即跳过 &#x27;*&#x27;</span><br>                    <span class="hljs-comment">// 2. 匹配一次前面的字符，即使用 &#x27;*&#x27; 匹配一个字符，一定要把 &#x27;*&#x27; 留下</span><br>                    dp[i][j] = dp[i][j - <span class="hljs-number">2</span>] || (dp[i - <span class="hljs-number">1</span>][j] &amp;&amp; (sChar == p.charAt(j - <span class="hljs-number">2</span>) || p.charAt(j - <span class="hljs-number">2</span>) == <span class="hljs-string">&#x27;.&#x27;</span>));<br>                &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="单调栈"><a href="#单调栈" class="headerlink" title="单调栈"></a>单调栈</h2><p>单调栈，通常是题目要求在一维数组中，要寻找任一个元素的右边或者左边第一个比自己大或者小的元素的位置。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/daily-temperatures/">每日温度</a>这道题目，记录数组元素右侧第一个大于自己的下标，维护一个递减的栈，当加入元素大于栈顶，就弹出所有不符合元素并且记录答案。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-greater-element-i/">下一个更大元素I</a>这道题目，两个数组之间有对应关系，这种情况可以用map来处理，这是一个技巧。下一个更大元素<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/next-greater-element-ii/">II</a>这题多了个循环数组的要求，可以通过下标取余遍历两次数组，长度是2 * len。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/trapping-rain-water/">接雨水</a>，经典常考题目，当前列雨水面积：min(左边柱子的最高高度，记录右边柱子的最高高度) - 当前柱子高度，简单解法是，用两个数组两次遍历，记录柱子左侧和右侧的最高高度，然后再遍历原数组求和。</p>
+<p>这个方法还可以更简单，只用一次遍历就可以。用首尾指针去记录左右最大值，取较小的一个指针移动，同时就可以计算那个指针所在位置的雨水，很巧妙。</p>
+<p>单调栈的方法写这个题目，比较麻烦，减少记忆负担算了。</p>
+<h2 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h2><p>对于图，简单来说就是两种遍历方式，一种是dfs，沿着一条路走到底，<strong>递归</strong>。另一种是bfs，一层一层搜索，<strong>队列</strong>。和树不同的点在于，图可能出现<strong>走回头路</strong>的情况，需要额外控制。</p>
+<p>如果要求是遍历图的话，用dfs写代码更方便，如果是要求最短路径那就需要bfs。</p>
+<h3 id="DFS"><a href="#DFS" class="headerlink" title="DFS"></a>DFS</h3><p><strong>dfs的题目，和回溯法是一样的</strong>。代码上看，都要另外写一个回溯函数，需要考虑终止条件和返回值。函数里遍历所有选择，结构相当于树的同一层。递归返回后要撤销选择。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/">矩阵中的最长递增路径</a></p>
+<h3 id="BFS"><a href="#BFS" class="headerlink" title="BFS"></a>BFS</h3><p>bfs的题目，必须要有队列来控制。目的就是求最短路径。<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/word-ladder/">单词接龙</a></p>
+<h3 id="岛屿问题"><a href="#岛屿问题" class="headerlink" title="岛屿问题"></a>岛屿问题</h3><p>岛屿问题是图的经典问题，求数量的时候，可以dfs遍历的岛屿就下沉，这样也不会走回头路，算是一个技巧。求面积的时候，dfs就需要定义返回值为面积了。</p>
+<p>有的题是从边界出发dfs，然后标记一些可以到边界的岛屿。有的题是通过高度差去标记可以流到边界的岛屿，思路都一样。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/pacific-atlantic-water-flow/">太平洋大西洋</a>，需要标记同时到两个边界的岛屿，建议用两次dfs，然后合并找出都标记的岛屿，代码好写很多。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/making-a-large-island/">最大人工岛</a>，建议不要去遍历所有空格变成人工岛的情况，时间复杂度很高。而是去标记现有的成片岛屿获取面积，然后只需要把人工岛周围岛屿面积相加就可以了。</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/island-perimeter/">岛屿周长</a>，简单题，周长 &#x3D; 岛屿数量 * 4 - 2 * 接壤边数（统计右&#x2F;下或者左&#x2F;上）</p>
+<h3 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h3><p>太难，放弃</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/divide-two-integers/">两数相除</a>，不能用乘除取余运算，思路是用移位运算，把被除数一直移位，移到能被减掉的最大位置做减法，之后循环。异或判断符号很好用。</p>
+<h3 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h3><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subarray-sum-equals-k/">和为 K 的子数组</a>，<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/subarray-sums-divisible-by-k/">和可被 K 整除的子数组</a></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%AE%97%E6%B3%95/" class="category-chain-item">算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AD%A6%E4%B9%A0%E6%84%9F%E6%82%9F/" class="print-no-link">#学习感悟</a>
+      
+        <a href="/tags/%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB/" class="print-no-link">#知识分享</a>
+      
+        <a href="/tags/%E7%AE%97%E6%B3%95/" class="print-no-link">#算法</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>代码随想录刷题总结</div>
+      <div>https://2536184321.github.io/2023/10/22/代码随想录刷题总结/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>cky</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年10月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/08/22/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="我的第一篇博客">
+                        <span class="hidden-mobile">我的第一篇博客</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"wgfsPZWfoXfOqvezQZHFjDhw-gzGzoHsz","appKey":"tFlCmTLupWOqs9boV829IZWY","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
