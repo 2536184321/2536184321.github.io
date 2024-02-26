@@ -18,22 +18,35 @@
   
     <meta name="description" content="设计模式 依赖和关联（简单理解）：当A使用B作为变量或者方法参数，叫依赖关系。当A使用B作为类属性，则叫关联关系，关联关系是一种强依赖关系。 多态的向上转型：父类类型 父类引用名 &#x3D; new 子类类型(); 编译阶段看左边的父类型，所以不能调用子类特有的成员，否则编译不通过 运行阶段看右边的子类型，调用方法从子类开始查找，一般调用子类重写的方法，属性无重写    1. 单例模式 理解：单">
 <meta property="og:type" content="article">
-<meta property="og:title" content="设计模式总结">
-<meta property="og:url" content="https://2536184321.github.io/2022/10/22/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:title" content="设计模式">
+<meta property="og:url" content="https://2536184321.github.io/2023/09/24/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
 <meta property="og:site_name" content="cky-blog">
 <meta property="og:description" content="设计模式 依赖和关联（简单理解）：当A使用B作为变量或者方法参数，叫依赖关系。当A使用B作为类属性，则叫关联关系，关联关系是一种强依赖关系。 多态的向上转型：父类类型 父类引用名 &#x3D; new 子类类型(); 编译阶段看左边的父类型，所以不能调用子类特有的成员，否则编译不通过 运行阶段看右边的子类型，调用方法从子类开始查找，一般调用子类重写的方法，属性无重写    1. 单例模式 理解：单">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-10-22T06:28:37.000Z">
-<meta property="article:modified_time" content="2024-02-09T10:07:25.444Z">
+<meta property="og:image" content="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240226235952395.png">
+<meta property="og:image" content="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000013615.png">
+<meta property="og:image" content="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000030157.png">
+<meta property="og:image" content="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000127357.png">
+<meta property="og:image" content="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000141080.png">
+<meta property="og:image" content="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000150502.png">
+<meta property="og:image" content="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000200509.png">
+<meta property="og:image" content="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000208991.png">
+<meta property="og:image" content="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000217504.png">
+<meta property="og:image" content="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000224921.png">
+<meta property="og:image" content="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000331277.png">
+<meta property="og:image" content="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000339228.png">
+<meta property="og:image" content="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000347541.png">
+<meta property="article:published_time" content="2023-09-24T06:28:00.000Z">
+<meta property="article:modified_time" content="2024-02-26T16:04:52.168Z">
 <meta property="article:author" content="cky">
-<meta property="article:tag" content="知识分享">
-<meta property="article:tag" content="考研">
+<meta property="article:tag" content="Java">
 <meta property="article:tag" content="设计模式">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240226235952395.png">
   
   
   
-  <title>设计模式总结 - cky-blog</title>
+  <title>设计模式 - cky-blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -199,7 +212,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="设计模式总结"></span>
+            <span id="subtitle" data-typed-text="设计模式"></span>
           
         </div>
 
@@ -210,8 +223,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-10-22 14:28" pubdate>
-          2022年10月22日 下午
+        <time datetime="2023-09-24 14:28" pubdate>
+          2023年9月24日 下午
         </time>
       </span>
     
@@ -270,7 +283,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">设计模式总结</h1>
+            <h1 id="seo-header">设计模式</h1>
             
             
               <div class="markdown-body">
@@ -302,16 +315,12 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs jav">public class Singleton&#123;<br>	public static void main(String a[])&#123;<br>        Singleton s1 = Singleton.getInstance();<br>        Singleton s2 = Singleton.getInstance();<br>        System.out.println(s1 == s2);<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ul>
 <h2 id="2-迭代器模式"><a href="#2-迭代器模式" class="headerlink" title="2. 迭代器模式"></a>2. 迭代器模式</h2><ul>
-<li><p>理解：<strong>聚合对象有两个功能：一是存储内部数据，二是遍历内部数据。把遍历行为提取成为迭代器。</strong></p>
-</li>
-<li><p>大概率只考察类图：抽象和具体迭代器 and 抽象和具体聚合类</p>
-</li>
-<li><p>例子：迭代器——电视遥控器    聚合类————电视机 </p>
-</li>
-<li><p>代码理解：</p>
-<ul>
+<li>理解：<strong>聚合对象有两个功能：一是存储内部数据，二是遍历内部数据。把遍历行为提取成为迭代器。</strong></li>
+<li>大概率只考察类图：抽象和具体迭代器 and 抽象和具体聚合类</li>
+<li>例子：迭代器——电视遥控器    聚合类————电视机 </li>
+<li>代码理解：<ul>
 <li>抽象迭代器只有抽象迭代方法声明，抽象聚合类只有抽象创建迭代器方法声明 </li>
-<li>具体聚合类：一是有数据，二是实现创建具体迭代器（返回一个具体迭代器对象），三是<strong>包含具体迭代器的类</strong>（即内部类的方式，也可以用另一种方式，单独写一个具体迭代器类，初始化需要具体聚合类参数）</li>
+<li>具体聚合类：一是有数据，二是实现创建具体迭代器（返回一个具体迭代器对象），三是<strong>包含具体迭代器的类</strong>（即内部类的方式，也可以用另一种方式，单独写一个具体迭代器类，初始化需要具体聚合类参数）<img src="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240226235952395.png" srcset="/img/loading.gif" lazyload alt="image-20240226235952395"></li>
 </ul>
 </li>
 </ul>
@@ -319,6 +328,7 @@
 <li><p>理解：将一系列算法封装起来，由环境类（使用算法的角色）选择使用哪种算法</p>
 </li>
 <li><p>例子：环境类（数组处理类）、抽象策略类、具体策略类（冒泡插入选择排序）</p>
+<p><img src="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000013615.png" srcset="/img/loading.gif" lazyload alt="image-20240227000013615"></p>
 </li>
 <li><p>代码理解：</p>
 <ul>
@@ -330,18 +340,23 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Client</span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">()</span>&#123;<br>        <span class="hljs-type">Context</span> <span class="hljs-variable">c</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Context</span>();<br>        <span class="hljs-type">StrategyA</span> <span class="hljs-variable">sa</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">StrategyA</span>();<br>        c.setStrategy(sa);<br>        c.contextAlgorithm(...);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ul>
 <h2 id="4-工厂模式"><a href="#4-工厂模式" class="headerlink" title="4. 工厂模式"></a>4. 工厂模式</h2><ul>
-<li>三个模式之间的关系：<ul>
+<li><p>三个模式之间的关系：</p>
+<ul>
 <li>当抽象工厂模式每一个具体工厂类只创造一个产品对象，抽象工厂退化为工厂方法模式</li>
 <li>当工厂方法模式抽象工厂与具体工厂合并，只有一个统一的工厂来创建产品对象，工厂方法模式退化为简单工厂模式</li>
 </ul>
 </li>
-<li>关于抽象工厂模式是否符合开闭原则<ul>
+<li><p>关于抽象工厂模式是否符合开闭原则</p>
+<ul>
 <li>如果增加产品族（由一个工厂生产的所有商品），只需要增加具体工厂，符合OCP</li>
 <li>如果增加产品等级结构（同一种商品），要修改所有工厂类，不符合OCP</li>
 </ul>
 </li>
-<li>关于工厂模式与策略模式的比较：工厂模式用于创建对象，策略模式用于选择各种方法</li>
-<li>工厂方法UML图：</li>
+<li><p>关于工厂模式与策略模式的比较：工厂模式用于创建对象，策略模式用于选择各种方法</p>
+</li>
+<li><p>工厂方法UML图：</p>
+<p><img src="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000030157.png" srcset="/img/loading.gif" lazyload alt="image-20240227000030157"></p>
+</li>
 </ul>
 <h2 id="5-观察者模式"><a href="#5-观察者模式" class="headerlink" title="5. 观察者模式"></a>5. 观察者模式</h2><ul>
 <li><p>很好理解</p>
@@ -349,6 +364,7 @@
 <li><p>例子：主题类（猫），观察者（老鼠、狗）猫叫后老鼠和狗都有动作</p>
 </li>
 <li><p>类图：抽象主题（观察者数组、增加、删除观察者）、抽象观察者、具体主题（提醒观察者）、具体观察者</p>
+<p><img src="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000127357.png" srcset="/img/loading.gif" lazyload alt="image-20240227000127357"></p>
 </li>
 <li><p>代码示例：</p>
 </li>
@@ -373,6 +389,7 @@
 <li><p>使用时候，用目标类作为父类创建适配器</p>
 </li>
 <li><p>类图：</p>
+<p><img src="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000141080.png" srcset="/img/loading.gif" lazyload alt="image-20240227000141080"></p>
 </li>
 </ul>
 <h2 id="9-桥接模式"><a href="#9-桥接模式" class="headerlink" title="9. 桥接模式"></a>9. 桥接模式</h2><ul>
@@ -387,6 +404,7 @@
 <li><p>例子：不同操作系统上播放多种格式的视频文件、描述不同制造商以及制造的电器种类</p>
 </li>
 <li><p>类图</p>
+<p><img src="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000150502.png" srcset="/img/loading.gif" lazyload alt="image-20240227000150502"></p>
 </li>
 </ul>
 <h2 id="10-组合模式"><a href="#10-组合模式" class="headerlink" title="10. 组合模式"></a>10. 组合模式</h2><ul>
@@ -397,6 +415,7 @@
 <li><p>例子：水果盘里有水果和水果盘；文件夹浏览和文件浏览方式；</p>
 </li>
 <li><p>类图</p>
+<p><img src="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000200509.png" srcset="/img/loading.gif" lazyload alt="image-20240227000200509"></p>
 </li>
 </ul>
 <h2 id="11-装饰模式"><a href="#11-装饰模式" class="headerlink" title="11. 装饰模式"></a>11. 装饰模式</h2><ul>
@@ -413,6 +432,7 @@
 <li><p>例子：变形金刚；</p>
 </li>
 <li><p>类图（抽象装饰类和具体装饰类的初始化有说法）</p>
+<p><img src="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000208991.png" srcset="/img/loading.gif" lazyload alt="image-20240227000208991"></p>
 </li>
 </ul>
 <h2 id="12-外观模式"><a href="#12-外观模式" class="headerlink" title="12.  外观模式"></a>12.  外观模式</h2><ul>
@@ -427,6 +447,7 @@
 <li><p>违反OCP，增加子系统会修改外观类代码，抽象外观模式符合OCP</p>
 </li>
 <li><p>体现单一职责，体现迪米特</p>
+<p><img src="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000217504.png" srcset="/img/loading.gif" lazyload alt="image-20240227000217504"></p>
 </li>
 </ul>
 <h2 id="13-代理模式"><a href="#13-代理模式" class="headerlink" title="13. 代理模式"></a>13. 代理模式</h2><ul>
@@ -435,6 +456,7 @@
 <li><p>很简单：代理对象有对象的变量，自己有控制等级变量，根据控制等级，调用对象的方法。因为要满足OCP所以继承一个抽象对象</p>
 </li>
 <li><p>客户端调用代理对象，完成对对象的代理访问</p>
+<p><img src="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000224921.png" srcset="/img/loading.gif" lazyload alt="image-20240227000224921"></p>
 </li>
 </ul>
 <h2 id="14-命令模式"><a href="#14-命令模式" class="headerlink" title="14. 命令模式"></a>14. 命令模式</h2><ul>
@@ -443,6 +465,7 @@
 <li><p>分为请求发送控制者和请求接收者，抽象请求和具体请求。发送者有很多请求对象，请求对象有发送接收者成员变量。发送者调用请求，请求调用接收者的方法</p>
 </li>
 <li><p>客户端建立请求控制对象，建立请求，初始化请求控制对象</p>
+<p><img src="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000331277.png" srcset="/img/loading.gif" lazyload alt="image-20240227000331277"></p>
 </li>
 </ul>
 <h2 id="15-中介者模式"><a href="#15-中介者模式" class="headerlink" title="15. 中介者模式"></a>15. 中介者模式</h2><ul>
@@ -451,6 +474,7 @@
 <li><p>分为抽象中介和具体中介、抽象同事和具体同事，具体中介有同事数组作为成员变量，抽象同事有抽象中介作为成员变量，用来调用中介的方法进行通信</p>
 </li>
 <li><p>考代码的话稍微有点复杂，画类图很简单</p>
+<p><img src="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000339228.png" srcset="/img/loading.gif" lazyload alt="image-20240227000339228"></p>
 </li>
 </ul>
 <h2 id="16-备忘录模式"><a href="#16-备忘录模式" class="headerlink" title="16. 备忘录模式"></a>16. 备忘录模式</h2><h2 id="17-状态模式"><a href="#17-状态模式" class="headerlink" title="17. 状态模式"></a>17. 状态模式</h2><ul>
@@ -464,6 +488,7 @@
 </ul>
 </li>
 <li><p>类图包括环境类（拥有状态的对象）、抽象状态类（封装与状态相关的行为）、具体状态类</p>
+<p><img src="https://cky1122-blog.oss-cn-shanghai.aliyuncs.com/blog/image-20240227000347541.png" srcset="/img/loading.gif" lazyload alt="image-20240227000347541"></p>
 </li>
 </ul>
 <h2 id="18-职责链模式"><a href="#18-职责链模式" class="headerlink" title="18. 职责链模式"></a>18. 职责链模式</h2><h2 id="19-享元模式"><a href="#19-享元模式" class="headerlink" title="19. 享元模式"></a>19. 享元模式</h2><h2 id="20-解释器模式"><a href="#20-解释器模式" class="headerlink" title="20. 解释器模式"></a>20. 解释器模式</h2><h2 id="21-模板方法模式"><a href="#21-模板方法模式" class="headerlink" title="21. 模板方法模式"></a>21. 模板方法模式</h2><h2 id="22-访问者模式"><a href="#22-访问者模式" class="headerlink" title="22. 访问者模式"></a>22. 访问者模式</h2>
@@ -484,12 +509,12 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="category-chain-item">设计模式</a>
+  <a href="/categories/Java/" class="category-chain-item">Java</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%80%83%E7%A0%94/" class="category-chain-item">考研</a>
+  <a href="/categories/Java/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="category-chain-item">设计模式</a>
   
   
 
@@ -506,9 +531,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E7%9F%A5%E8%AF%86%E5%88%86%E4%BA%AB/" class="print-no-link">#知识分享</a>
-      
-        <a href="/tags/%E8%80%83%E7%A0%94/" class="print-no-link">#考研</a>
+        <a href="/tags/Java/" class="print-no-link">#Java</a>
       
         <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" class="print-no-link">#设计模式</a>
       
@@ -522,8 +545,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>设计模式总结</div>
-      <div>https://2536184321.github.io/2022/10/22/设计模式/</div>
+      <div>设计模式</div>
+      <div>https://2536184321.github.io/2023/09/24/设计模式/</div>
     </div>
     <div class="license-meta">
       
@@ -535,7 +558,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年10月22日</div>
+          <div>2023年9月24日</div>
         </div>
       
       
@@ -567,15 +590,21 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/10/22/%E8%AE%A1%E7%BD%91/" title="842计网">
+                      <a href="/2023/10/22/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E5%88%B7%E9%A2%98%E6%80%BB%E7%BB%93/" title="代码随想录刷题总结">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">842计网</span>
+                        <span class="hidden-mobile">代码随想录刷题总结</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
+                    
+                      <a href="/2023/09/22/Java%E8%AF%AD%E6%B3%95/" title="Java语法糖">
+                        <span class="hidden-mobile">Java语法糖</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
                     
                   </article>
                 </div>
